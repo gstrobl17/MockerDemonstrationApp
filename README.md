@@ -27,7 +27,7 @@ The interactor and presenter implementations are pretty bland for the Main modul
 
 ![MainCodeCoverage](/assets/MainCodeCoverage.png)
 
-The presentor is interesting because it uses a timer to determine when to tell the view to remove the partical emitter and show the "Tap Me" button again. Both the `showConfetti()` and `showSnow()` use three unit tests to cover all the code including handling the timer firing.
+The presenter is interesting because it uses a timer to determine when to tell the view to remove the particle emitter and show the "Tap Me" button again. Both the `showConfetti()` and `showSnow()` use three unit tests to cover all the code including handling the timer firing.
 
 | Tested Method  | Test for nil View | Test to Create Timer but not fire | Test to Create and Fire Timer | 
 | --- | --- | --- | --- |
@@ -37,13 +37,13 @@ The presentor is interesting because it uses a timer to determine when to tell t
 
 ### \#3
 
-100% code coverage is also acheived on the `DemonstrationFacade`. 
+100% code coverage is also achieved on the `DemonstrationFacade`. 
 
 ![FacadeCodeCoverage](/assets/FacadeCodeCoverage.png)
 
-The tests for `retrieveSomeData(from url: URL)` demonstrate testing a network call. They execute both a failed attempt (where an error is thrown) and a successful attempt. In a real implemenation, where there may be inspection of the response and conversion of the response data into data transfer objects (DTO), logic for all the processing steps can be tested because of the ability to control the response and the injected components completely. 
+The tests for `retrieveSomeData(from url: URL)` demonstrate testing a network call. They execute both a failed attempt (where an error is thrown) and a successful attempt. In a real implementation, where there may be inspection of the response and conversion of the response data into data transfer objects (DTO), logic for all the processing steps can be tested because of the ability to control the response and the injected components completely. 
 
-Likewise, the tests for `pretendToCheckForFile(at url: URL)` can be perfectly controlled as well. When you have to do file operations it can be extremely difficult to execute the error paths. The Strobl Approach makes it possible to construst tests that execute all paths within a method. 
+Likewise, the tests for `pretendToCheckForFile(at url: URL)` can be perfectly controlled as well. When you have to do file operations it can be extremely difficult to execute the error paths. The Strobl Approach makes it possible to construct tests that execute all paths within a method. 
 
 ## License
 [Unlicense](https://unlicense.org)
