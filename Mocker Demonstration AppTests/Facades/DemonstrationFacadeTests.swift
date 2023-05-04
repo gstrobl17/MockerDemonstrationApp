@@ -59,7 +59,7 @@ final class DemonstrationFacadeTests: XCTestCase {
 
     // MARK: - retrieveSomeData(from:)
 
-    func testRetrieveSomeData_attmemptThrowsError() async throws {
+    func testRetrieveSomeData_attemptThrowsError() async throws {
         let url = try XCTUnwrap(URL(string: "www.test.com"))
         dataRetreiver.errorToThrow = MockError.testing
         dataRetreiver.dataFromUrlDelegateShouldThrowError = true
@@ -84,7 +84,7 @@ final class DemonstrationFacadeTests: XCTestCase {
         XCTAssertEqual(notificationPoster.calledMethods, [])
     }
 
-    func testRetrieveSomeData_attmemptReturnsData() async throws {
+    func testRetrieveSomeData_attemptReturnsData() async throws {
         let url = try XCTUnwrap(URL(string: "www.test.com"))
         let data = try XCTUnwrap("123".data(using: .utf8))
         dataRetreiver.dataFromUrlDelegateReturnValue = (data, URLResponse())
