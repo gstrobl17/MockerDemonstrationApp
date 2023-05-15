@@ -21,6 +21,8 @@ Several protocols are defined so that **Foundation** classes can be dependency i
 | `TimerFactory`  | `Timer` | `FoundationTimerFactory` |
 | `Timing`  | `Timer` |  |
 
+Mocks for all of the protocols are included in the unit test code.
+
 ### \#2
 
 The interactor and presenter implementations are pretty bland for the Main module. However, 100% unit test code coverage is achieved on these objects providing a high level of confidence in the correctness of their implementations. Pay attention to the objects injected into the interactor and presenter.
@@ -47,4 +49,3 @@ Likewise, the tests for `pretendToCheckForFile(at url: URL)` can also be perfect
 
 ## License
 [Unlicense](https://unlicense.org)
-
