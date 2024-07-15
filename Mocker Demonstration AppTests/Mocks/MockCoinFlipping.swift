@@ -57,3 +57,15 @@ extension MockCoinFlipping.Method: CustomStringConvertible {
         return value
     }
 }
+
+extension MockCoinFlipping: CustomReflectable {
+    public var customMirror: Mirror {
+        Mirror(self,
+               children: [
+                "calledMethods": calledMethods,
+               ],
+               displayStyle: .none
+        )
+    }
+    
+}

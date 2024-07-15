@@ -5,13 +5,15 @@
 //  Created by Greg Strobl on 5/2/23.
 //
 
+import MacrosForStroblMocks
 import XCTest
 @testable import Mocker_Demonstration_App
 
+@UsesStroblMocks
 final class MainInteractorTests: XCTestCase {
 
-    var presenter: MockMainInteractorOutput!
-    var facade: MockDemonstrating!
+    @StroblMock var presenter: MockMainInteractorOutput!
+    @StroblMock var facade: MockDemonstrating!
     var interactor: MainInteractor!
     
     override func setUpWithError() throws {

@@ -5,15 +5,17 @@
 //  Created by Greg Strobl on 5/3/23.
 //
 
+import MacrosForStroblMocks
 import XCTest
 @testable import Mocker_Demonstration_App
 
+@UsesStroblMocks
 final class DemonstrationFacadeTests: XCTestCase {
     
-    var coinFlipper: MockCoinFlipping!
-    var dataRetreiver: MockDataRetreiving!
-    var fileManager: MockFileManaging!
-    var notificationPoster: MockNotificationPosting!
+    @StroblMock var coinFlipper: MockCoinFlipping!
+    @StroblMock var dataRetreiver: MockDataRetreiving!
+    @StroblMock var fileManager: MockFileManaging!
+    @StroblMock var notificationPoster: MockNotificationPosting!
     var facade: DemonstrationFacade!
     
     override func setUpWithError() throws {
@@ -39,10 +41,8 @@ final class DemonstrationFacadeTests: XCTestCase {
         let result = facade.flipCoin()
 
         XCTAssertEqual(result, .heads)
+        verifyStroblMocksUnused(except: [.coinFlipper])
         XCTAssertEqual(coinFlipper.calledMethods, [.flipCalled])
-        XCTAssertEqual(dataRetreiver.calledMethods, [])
-        XCTAssertEqual(fileManager.calledMethods, [])
-        XCTAssertEqual(notificationPoster.calledMethods, [])
     }
     
     func testFlipCoin_coinFlipperReturnsTails() {
@@ -51,10 +51,8 @@ final class DemonstrationFacadeTests: XCTestCase {
         let result = facade.flipCoin()
 
         XCTAssertEqual(result, .tails)
+        verifyStroblMocksUnused(except: [.coinFlipper])
         XCTAssertEqual(coinFlipper.calledMethods, [.flipCalled])
-        XCTAssertEqual(dataRetreiver.calledMethods, [])
-        XCTAssertEqual(fileManager.calledMethods, [])
-        XCTAssertEqual(notificationPoster.calledMethods, [])
     }
 
     // MARK: - retrieveSomeData(from:)
@@ -75,13 +73,11 @@ final class DemonstrationFacadeTests: XCTestCase {
         XCTAssertNil(resultingData)
         XCTAssertNotNil(resultingError)
         XCTAssertTrue(resultingError is MockError)
-        XCTAssertEqual(coinFlipper.calledMethods, [])
+        verifyStroblMocksUnused(except: [.dataRetreiver])
         XCTAssertEqual(dataRetreiver.calledMethods, [.dataFromUrlDelegateCalled])
         XCTAssertEqual(dataRetreiver.assignedParameters, [.delegate, .url])
         XCTAssertNil(dataRetreiver.delegate)
         XCTAssertEqual(dataRetreiver.url, url)
-        XCTAssertEqual(fileManager.calledMethods, [])
-        XCTAssertEqual(notificationPoster.calledMethods, [])
     }
 
     func testRetrieveSomeData_attemptReturnsData() async throws {
@@ -100,13 +96,11 @@ final class DemonstrationFacadeTests: XCTestCase {
         XCTAssertNotNil(resultingData)
         XCTAssertEqual(resultingData, data)
         XCTAssertNil(resultingError)
-        XCTAssertEqual(coinFlipper.calledMethods, [])
+        verifyStroblMocksUnused(except: [.dataRetreiver])
         XCTAssertEqual(dataRetreiver.calledMethods, [.dataFromUrlDelegateCalled])
         XCTAssertEqual(dataRetreiver.assignedParameters, [.delegate, .url])
         XCTAssertNil(dataRetreiver.delegate)
         XCTAssertEqual(dataRetreiver.url, url)
-        XCTAssertEqual(fileManager.calledMethods, [])
-        XCTAssertEqual(notificationPoster.calledMethods, [])
     }
 
     // MARK: - pretendToCheckForFile(at:)
@@ -117,8 +111,7 @@ final class DemonstrationFacadeTests: XCTestCase {
         
         facade.pretendToCheckForFile(at: url)
 
-        XCTAssertEqual(coinFlipper.calledMethods, [])
-        XCTAssertEqual(dataRetreiver.calledMethods, [])
+        verifyStroblMocksUnused(except: [.fileManager, .notificationPoster])
         XCTAssertEqual(fileManager.calledMethods, [.fileExistsAtPathPathCalled])
         XCTAssertEqual(fileManager.assignedParameters, [.path])
         XCTAssertEqual(fileManager.path, url.absoluteString)
@@ -135,8 +128,7 @@ final class DemonstrationFacadeTests: XCTestCase {
         
         facade.pretendToCheckForFile(at: url)
 
-        XCTAssertEqual(coinFlipper.calledMethods, [])
-        XCTAssertEqual(dataRetreiver.calledMethods, [])
+        verifyStroblMocksUnused(except: [.fileManager, .notificationPoster])
         XCTAssertEqual(fileManager.calledMethods, [.fileExistsAtPathPathCalled])
         XCTAssertEqual(fileManager.assignedParameters, [.path])
         XCTAssertEqual(fileManager.path, url.absoluteString)

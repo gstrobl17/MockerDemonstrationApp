@@ -128,3 +128,16 @@ extension MockMainView.MethodParameter: CustomStringConvertible {
         return value
     }
 }
+
+extension MockMainView: CustomReflectable {
+    public var customMirror: Mirror {
+        Mirror(self,
+               children: [
+                "calledMethods": calledMethods,
+                "assignedParameters": assignedParameters
+               ],
+               displayStyle: .none
+        )
+    }
+    
+}

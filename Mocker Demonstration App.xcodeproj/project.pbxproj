@@ -50,6 +50,7 @@
 		6429FFD12A01984F00E7E5B5 /* MockMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6429FFD02A01984F00E7E5B5 /* MockMainView.swift */; };
 		6429FFD32A0198B800E7E5B5 /* MainPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6429FFD22A0198B800E7E5B5 /* MainPresenterTests.swift */; };
 		6429FFD52A01A0DD00E7E5B5 /* MainInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6429FFD42A01A0DD00E7E5B5 /* MainInteractorTests.swift */; };
+		64CA1DD42C456F3B0074F15E /* MacrosForStroblMocks in Frameworks */ = {isa = PBXBuildFile; productRef = 64CA1DD32C456F3B0074F15E /* MacrosForStroblMocks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64CA1DD42C456F3B0074F15E /* MacrosForStroblMocks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +337,9 @@
 				6429FF672A0154CE00E7E5B5 /* PBXTargetDependency */,
 			);
 			name = "Mocker Demonstration AppTests";
+			packageProductDependencies = (
+				64CA1DD32C456F3B0074F15E /* MacrosForStroblMocks */,
+			);
 			productName = "Mocker Demonstration AppTests";
 			productReference = 6429FF652A0154CE00E7E5B5 /* Mocker Demonstration AppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -347,7 +352,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					6429FF4E2A0154CD00E7E5B5 = {
 						CreatedOnToolsVersion = 14.2;
@@ -367,6 +372,9 @@
 				Base,
 			);
 			mainGroup = 6429FF462A0154CD00E7E5B5;
+			packageReferences = (
+				64CA1DD22C456F3B0074F15E /* XCRemoteSwiftPackageReference "MacrosForStroblMocks" */,
+			);
 			productRefGroup = 6429FF502A0154CD00E7E5B5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -510,6 +518,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -570,6 +579,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -709,6 +719,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		64CA1DD22C456F3B0074F15E /* XCRemoteSwiftPackageReference "MacrosForStroblMocks" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gstrobl17/MacrosForStroblMocks";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		64CA1DD32C456F3B0074F15E /* MacrosForStroblMocks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64CA1DD22C456F3B0074F15E /* XCRemoteSwiftPackageReference "MacrosForStroblMocks" */;
+			productName = MacrosForStroblMocks;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6429FF472A0154CD00E7E5B5 /* Project object */;
 }

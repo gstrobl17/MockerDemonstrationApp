@@ -80,3 +80,16 @@ extension MockMainPresenter.MethodParameter: CustomStringConvertible {
         return value
     }
 }
+
+extension MockMainPresenter: CustomReflectable {
+    public var customMirror: Mirror {
+        Mirror(self,
+               children: [
+                "calledMethods": calledMethods,
+                "assignedParameters": assignedParameters
+               ],
+               displayStyle: .none
+        )
+    }
+    
+}

@@ -52,3 +52,15 @@ extension MockTimer.Method: CustomStringConvertible {
         return value
     }
 }
+
+extension MockTimer: CustomReflectable {
+    public var customMirror: Mirror {
+        Mirror(self,
+               children: [
+                "calledMethods": calledMethods,
+               ],
+               displayStyle: .none
+        )
+    }
+    
+}

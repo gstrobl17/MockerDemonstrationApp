@@ -149,3 +149,16 @@ extension MockFileManaging.MethodParameter: CustomStringConvertible {
         return value
     }
 }
+
+extension MockFileManaging: CustomReflectable {
+    public var customMirror: Mirror {
+        Mirror(self,
+               children: [
+                "calledMethods": calledMethods,
+                "assignedParameters": assignedParameters
+               ],
+               displayStyle: .none
+        )
+    }
+    
+}

@@ -5,15 +5,17 @@
 //  Created by Greg Strobl on 5/2/23.
 //
 
+import MacrosForStroblMocks
 import XCTest
 @testable import Mocker_Demonstration_App
 
+@UsesStroblMocks
 final class MainPresenterTests: XCTestCase {
 
-    var view: MockMainView!
-    var interactor: MockMainInteractorInput!
-    var router: MockMainWireframe!
-    var timerFactory: MockTimerFactory!
+    @StroblMock var view: MockMainView!
+    @StroblMock var interactor: MockMainInteractorInput!
+    @StroblMock var router: MockMainWireframe!
+    @StroblMock var timerFactory: MockTimerFactory!
     var presenter: MainPresenter!
     
     override func setUpWithError() throws {
@@ -37,13 +39,12 @@ final class MainPresenterTests: XCTestCase {
         
         presenter.tapMeButtonTapped()
         
+        verifyStroblMocksUnused(except: [.view, .interactor])
         XCTAssertEqual(view.calledMethods, [.showTapMeButtonShowTapMeFlagCalled])
         XCTAssertEqual(view.assignedParameters, [.showTapMeFlag])
         XCTAssertEqual(view.showTapMeFlag, false)
         XCTAssertEqual(interactor.calledMethods, [.tapMeButtonTappedCalled])
         XCTAssertEqual(interactor.assignedParameters, [])
-        XCTAssertEqual(router.calledMethods, [])
-        XCTAssertEqual(timerFactory.calledMethods, [])
     }
     
     // MARK: - showConfetti()
@@ -53,22 +54,18 @@ final class MainPresenterTests: XCTestCase {
         
         presenter.showConfetti()
         
-        XCTAssertEqual(view.calledMethods, [])
-        XCTAssertEqual(interactor.calledMethods, [])
-        XCTAssertEqual(router.calledMethods, [])
-        XCTAssertEqual(timerFactory.calledMethods, [])
+        verifyStroblMocksUnused()
     }
     
     func testShowConfetti_timerCreatedButNotFired() {
         
         presenter.showConfetti()
         
+        verifyStroblMocksUnused(except: [.view, .timerFactory])
         XCTAssertNotNil(presenter.timer)
         XCTAssertEqual(view.calledMethods, [.showConfettiShowConfettiFlagCalled])
         XCTAssertEqual(view.assignedParameters, [.showConfettiFlag])
         XCTAssertEqual(view.showConfettiFlag, true)
-        XCTAssertEqual(interactor.calledMethods, [])
-        XCTAssertEqual(router.calledMethods, [])
         XCTAssertEqual(timerFactory.calledMethods, [.scheduledTimerWithTimeIntervalIntervalRepeatsBlockCalled])
         XCTAssertEqual(timerFactory.assignedParameters, [.interval, .repeats, .block])
         XCTAssertEqual(timerFactory.interval, MainPresenter.Duration.delay)
@@ -81,14 +78,13 @@ final class MainPresenterTests: XCTestCase {
         
         presenter.showConfetti()
         
+        verifyStroblMocksUnused(except: [.view, .timerFactory])
         XCTAssertNotNil(presenter.timer)    // Not nil because the completion handler completes first
         XCTAssertEqual(view.calledMethods, [.showTapMeButtonShowTapMeFlagCalled, .showConfettiShowConfettiFlagCalled, .showSnowShowSnowFlagCalled])
         XCTAssertEqual(view.assignedParameters, [.showTapMeFlag, .showConfettiFlag, .showSnowFlag])
         XCTAssertEqual(view.showTapMeFlag, true)
         XCTAssertEqual(view.showConfettiFlag, false)    // Set to true on the first call and false on the second
         XCTAssertEqual(view.showSnowFlag, false)
-        XCTAssertEqual(interactor.calledMethods, [])
-        XCTAssertEqual(router.calledMethods, [])
         XCTAssertEqual(timerFactory.calledMethods, [.scheduledTimerWithTimeIntervalIntervalRepeatsBlockCalled])
         XCTAssertEqual(timerFactory.assignedParameters, [.interval, .repeats, .block])
         XCTAssertEqual(timerFactory.interval, MainPresenter.Duration.delay)
@@ -113,12 +109,11 @@ final class MainPresenterTests: XCTestCase {
         
         presenter.showSnow()
         
+        verifyStroblMocksUnused(except: [.view, .timerFactory])
         XCTAssertNotNil(presenter.timer)
         XCTAssertEqual(view.calledMethods, [.showSnowShowSnowFlagCalled])
         XCTAssertEqual(view.assignedParameters, [.showSnowFlag])
         XCTAssertEqual(view.showSnowFlag, true)
-        XCTAssertEqual(interactor.calledMethods, [])
-        XCTAssertEqual(router.calledMethods, [])
         XCTAssertEqual(timerFactory.calledMethods, [.scheduledTimerWithTimeIntervalIntervalRepeatsBlockCalled])
         XCTAssertEqual(timerFactory.assignedParameters, [.interval, .repeats, .block])
         XCTAssertEqual(timerFactory.interval, MainPresenter.Duration.delay)
@@ -131,14 +126,13 @@ final class MainPresenterTests: XCTestCase {
         
         presenter.showSnow()
         
+        verifyStroblMocksUnused(except: [.view, .timerFactory])
         XCTAssertNotNil(presenter.timer)    // Not nil because the completion handler completes first
         XCTAssertEqual(view.calledMethods, [.showTapMeButtonShowTapMeFlagCalled, .showConfettiShowConfettiFlagCalled, .showSnowShowSnowFlagCalled])
         XCTAssertEqual(view.assignedParameters, [.showTapMeFlag, .showConfettiFlag, .showSnowFlag])
         XCTAssertEqual(view.showTapMeFlag, true)
         XCTAssertEqual(view.showConfettiFlag, false)    // Set to true on the first call and false on the second
         XCTAssertEqual(view.showSnowFlag, false)
-        XCTAssertEqual(interactor.calledMethods, [])
-        XCTAssertEqual(router.calledMethods, [])
         XCTAssertEqual(timerFactory.calledMethods, [.scheduledTimerWithTimeIntervalIntervalRepeatsBlockCalled])
         XCTAssertEqual(timerFactory.assignedParameters, [.interval, .repeats, .block])
         XCTAssertEqual(timerFactory.interval, MainPresenter.Duration.delay)
@@ -153,6 +147,7 @@ final class MainPresenterTests: XCTestCase {
         
         presenter.transitionBackToTapMeButton()
         
+        verifyStroblMocksUnused(except: [])
         XCTAssertEqual(view.calledMethods, [])
         XCTAssertEqual(interactor.calledMethods, [])
         XCTAssertEqual(router.calledMethods, [])
@@ -165,14 +160,13 @@ final class MainPresenterTests: XCTestCase {
         
         presenter.transitionBackToTapMeButton()
 
+        verifyStroblMocksUnused(except: [.view])
         XCTAssertNil(presenter.timer)
         XCTAssertEqual(view.calledMethods, [.showTapMeButtonShowTapMeFlagCalled, .showConfettiShowConfettiFlagCalled, .showSnowShowSnowFlagCalled])
         XCTAssertEqual(view.assignedParameters, [.showTapMeFlag, .showConfettiFlag, .showSnowFlag])
         XCTAssertEqual(view.showTapMeFlag, true)
         XCTAssertEqual(view.showConfettiFlag, false)
         XCTAssertEqual(view.showSnowFlag, false)
-        XCTAssertEqual(interactor.calledMethods, [])
-        XCTAssertEqual(router.calledMethods, [])
         XCTAssertEqual(timerFactory.calledMethods, [])
         XCTAssertEqual(timer.calledMethods, [.invalidateCalled])
     }

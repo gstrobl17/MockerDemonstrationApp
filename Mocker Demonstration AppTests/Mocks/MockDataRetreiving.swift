@@ -134,3 +134,16 @@ extension MockDataRetreiving.MethodParameter: CustomStringConvertible {
         return value
     }
 }
+
+extension MockDataRetreiving: CustomReflectable {
+    public var customMirror: Mirror {
+        Mirror(self,
+               children: [
+                "calledMethods": calledMethods,
+                "assignedParameters": assignedParameters
+               ],
+               displayStyle: .none
+        )
+    }
+    
+}

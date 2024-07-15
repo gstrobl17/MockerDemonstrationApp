@@ -109,3 +109,17 @@ extension MockMainWireframe.MethodParameter: CustomStringConvertible {
         return value
     }
 }
+
+extension MockMainWireframe: CustomReflectable {
+    public var customMirror: Mirror {
+        Mirror(self,
+               children: [
+                "calledMethods": calledMethods,
+                "calledStaticMethods": MockMainWireframe.calledStaticMethods,
+                "assignedParameters": assignedParameters
+               ],
+               displayStyle: .none
+        )
+    }
+    
+}
